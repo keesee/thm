@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+- '6.11'
+before_script:
+- npm install -g lab
+- npm install -g knex
+- psql -c 'create database publish;' -U postgres
+sudo: false
+env:
+- NODE_ENV="development" CXX="g++-4.8" API_HOST="0.0.0.0" PORT=2015 LOG_LEVEL="info" DATABASE_URL="postgres:///publish" DEBUG=false S3_EMULATION=true REMIX_SCRIPT="http://localhost:3500/resources/remix/index.js"
+cache:
+  directories:
+  - node_modules
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
